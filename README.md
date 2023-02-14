@@ -1,2 +1,2 @@
 # codes
- Diplomovy_projekt_kody
+ Diplomovy projekt kody
