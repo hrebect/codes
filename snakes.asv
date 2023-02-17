@@ -1,13 +1,13 @@
 %% set parametres 
 
-alpha = 1000;
-beta = 1000;
-gamma = 1000;
-max_iter = 500;
-min_dist = 300;
+alpha = 100;
+beta = 100;
+gamma = 100;
+max_iter = 1;
+min_dist = 100;
 
 % parametro of energetic function
-c = 10;
+c = 1;
 
 %% data import
 
@@ -85,29 +85,15 @@ while i < max_iter
     [Ex, Ey] = get_E(X1, Y1, X2, Y2, min_dist, c);
 
     % get shift
-    del_X = B_inv*(eig_A .* del_X_prev - Ex)
+    del_X = B_inv*(eig_A .* del_X_prev - Ex);
     del_Y = B_inv*(eig_A .* del_Y_prev - Ey);
-    
-    % get new vertices
-    X1 = X1 + del_X;
-    Y1 = Y1 + del_Y;
 
-    % update i-1 shift
-    del_X_prev = del_X;
-    del_Y_prev = del_Y;
+    X1 = X1 + del_X
+    Y1 = Y1 + del_Y
 
-    % update iteration
+
     i = i + 1;
 end
-
-
-%% vizualization
-figure
-hold on
-plot(X1_0, Y1_0, '-o','Color','red')
-plot(X2, Y2, '-o','Color','black')
-plot(X1, Y1, '-o', 'Color','blue')
-
 
 
 
