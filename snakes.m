@@ -4,25 +4,25 @@ alpha = 1000;
 beta = 1000;
 gamma = 1000;
 max_iter = 500;
-min_dist = 300;
+min_dist = 100;
 
 % parametro of energetic function
-c = 10;
+c_energy = 1;
 
 %% data import
 
 % load points from shapefile
-S1 = shaperead('data/line_1.shp');
-S2 = shaperead('data/line_2.shp');
+S1 = shaperead('data/shapes/line_1.shp');
+S2 = shaperead('data/shapes/line_2.shp');
 
-X1 = S1.X;
+X1 = S1.X';
 X1(end) = [];
-Y1 = S1.Y;
+Y1 = S1.Y';
 Y1(end) = [];
 
-X2 = S2.X;
+X2 = S2.X';
 X2(end) = [];
-Y2 = S2.Y;
+Y2 = S2.Y';
 Y2(end) = [];
 
 %% compute h
@@ -82,11 +82,11 @@ del_Y_prev = zeros(n,1);
 
 while i < max_iter
     % create Energy matrix
-    [Ex, Ey] = get_E(X1, Y1, X2, Y2, min_dist, c);
+    [Ex, Ey] = get_E(X1, Y1, X2, Y2, min_dist, c_energy);
 
     % get shift
     del_X = B_inv*(eig_A .* del_X_prev - Ex)
-    del_Y = B_inv*(eig_A .* del_Y_prev - Ey);
+    del_Y = B_inv*(eig_A .* del_Y_prev - Ey)
     
     % get new vertices
     X1 = X1 + del_X;
