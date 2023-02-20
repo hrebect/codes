@@ -2,7 +2,7 @@ function [Ex, Ey] = get_E(X, Y, S_x, S_y, min_dist, c)
     % get number of point in spline
     n = length(X);
     % create S in suitable form
-    S = [S_x, S_y]
+    S = [S_x, S_y];
 
     % initialize Ex, Ey
     Ex = zeros(n,1);
@@ -16,7 +16,9 @@ function [Ex, Ey] = get_E(X, Y, S_x, S_y, min_dist, c)
         q = S(nearest, :);
         
         % calculate parcial derivation, if distance is small enough
-        if d < min_dist && d ~= 0
+        eps = 1*10^-6;
+
+        if d < min_dist && d > abs(eps)
             Ex(i) = -c*((p(1)-q(1))/d*min_dist);
             Ey(i) = -c*((p(2)-q(2))/d*min_dist);
 
