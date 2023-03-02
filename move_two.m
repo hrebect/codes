@@ -1,4 +1,4 @@
-function [X1 Y1, X2, Y2] = move_two(X1, Y1, X2, Y2, alpha, beta, gamma, c_energy, max_iter, min_dist)
+function [X1, Y1, X2, Y2] = move_two(X1, Y1, X2, Y2, alpha, beta, gamma, c_energy, max_iter, min_dist)
 
 % get h
 h1 = get_h(X1, Y1);
